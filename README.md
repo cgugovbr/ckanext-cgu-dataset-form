@@ -1,6 +1,8 @@
 # ckanext-cgu-dataset-form
 
-Extensão CKAN desenvolvida pela CGU para personalizar o formulário de criação e edição de datasets.
+Extensão CKAN desenvolvida pela CGU para personalizar o formulário de criação e edição de datasets, adicionando campos específicos utilizados internamente pela CGU.
+
+Esses campos são armazenados nos extras do dataset, mas foram incorporados diretamente no formulário para simplificar o preenchimento e garantir maior padronização das informações.
 
 ## **📦 Requisitos**
 
@@ -8,30 +10,27 @@ Extensão CKAN desenvolvida pela CGU para personalizar o formulário de criaçã
 - Python 3.7 ou superior
 - Acesso ao ambiente virtual onde o CKAN está instalado
 
-### ⚙️ **Instalação — Passo 1: Clonar o repositório**
+### **⚙️ Instalação**
 
-Dentro do ambiente do CKAN, execute:
+#### 1. Ativar o ambiente virtual do CKAN
 ```bash
-cd /usr/lib/ckan/src
-git clone https://github.com/cgugovbr/ckanext-cgu-dataset-form.git
+. /usr/lib/ckan/default/bin/activate
+```
+>    Ajuste o caminho conforme o local onde o CKAN está instalado no seu ambiente (por exemplo, `/usr/lib/ckan/default`, `/opt/ckan/default`, etc.).
+
+#### 2. Instalar o plugin a partir do repositório oficial
+```bash
+pip install --no-cache-dir 'ckanext-cgu-dataset-form[requirements] @ git+https://github.com/cgugovbr/ckanext-cgu-dataset-form.git'
 ```
 
-### ⚙️ **Instalação — Passo 2: Instalar a extensão**
-
-Entre na pasta do plugin e instale no ambiente virtual do CKAN:
-```bash
-cd ckanext-cgu-dataset-form
-pip install -e .
-```
-
-### ⚙️ **Instalação — Passo 3: Configurar o CKAN**
-
+#### 3. Configurar o CKAN
 Edite o arquivo ckan.ini (geralmente em /etc/ckan/default/ckan.ini ou conforme o seu ambiente):
 
 Adicione o plugin à lista de ckan.plugins:
 ```
 ckan.plugins = cgu_dataset_form <outros_plugins>
 ```
+Após executar todos os passos reinicie o ckan.
 
 ## 🧠 **Suporte**
 
@@ -39,8 +38,3 @@ Este plugin foi desenvolvido para uso interno da CGU, mas pode ser reutilizado p
 
 Em caso de dúvidas ou sugestões, abra uma issue no repositório:
 https://github.com/cgugovbr/ckanext-cgu-dataset-form/issues
-
-
-## 📄 Licença
-
-[AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)
