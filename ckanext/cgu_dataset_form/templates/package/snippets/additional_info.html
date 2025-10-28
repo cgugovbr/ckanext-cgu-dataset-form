@@ -1,0 +1,130 @@
+{% ckan_extends %}
+
+{% block extras %}
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'periodicidade') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Periodicidade") }}</th>
+      <td class="dataset-details">{{ h.periodicidades_label(h.cgu_dataset_form_get_extra(pkg_dict.extras, 'periodicidade')) }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaTemporalInicio') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Cobertura Temporal Início") }} teste</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaTemporalInicio') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaTemporalFim') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Cobertura Temporal Fim") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaTemporalFim') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaEspacial') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Cobertura Espacial") }}</th>
+      <td class="dataset-details">{{ h.opcoes_espaciais_label(h.cgu_dataset_form_get_extra(pkg_dict.extras, 'coberturaEspacial')) }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'valorCoberturaEspacial') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Detalhamento da Cobertura Espacial") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'valorCoberturaEspacial') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'granularidadeEspacial') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Granularidade Espacial") }}</th>
+      <td class="dataset-details">{{ h.opcoes_espaciais_label(h.cgu_dataset_form_get_extra(pkg_dict.extras, 'granularidadeEspacial')) }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'atualizacaoVersao') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Atualização de Versão") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'atualizacaoVersao') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'descontinuado') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Descontinuado") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'descontinuado') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dataDescontinuacao') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Data da Descontinuação") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dataDescontinuacao') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'observanciaLegal') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Observância Legal") }}</th>
+      <td class="dataset-details">
+        <ul>
+          {% for observancia in h.cgu_dataset_form_get_extra(pkg_dict.extras, 'observanciaLegal', '').split(',') %}
+            <li>{{ h.label_observancia_legal(observancia) }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosAbertos') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Dados Abertos") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosAbertos') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'relacaoOds') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Possui relação com objetivos de desenvolvimento sustentável (ODS)?") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'relacaoOds') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'ods') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Objetivos de Desenvolvimento Sustentável (ODS)") }}</th>
+      <td class="dataset-details">
+        <ul>
+          {% for ods in h.cgu_dataset_form_get_extra(pkg_dict.extras, 'ods', '').split(',') %}
+            <li>{{ h.objetivos_desenvolvimento_sustentavel_label(ods) }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosRacaEtnia') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Possui dados de raça/etnia?") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosRacaEtnia') }}</td>
+    </tr>
+  {% endif %}
+
+  {% if h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosGenero') %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Possui dados de gênero?") }}</th>
+      <td class="dataset-details">{{ h.cgu_dataset_form_get_extra(pkg_dict.extras, 'dadosGenero') }}</td>
+    </tr>
+  {% endif %}
+
+  {% for extra in h.sorted_extras(h.cgu_dataset_form_remove_extras(pkg_dict.extras)) %}
+        {% set key, value = extra %}
+        <tr rel="dc:relation" resource="_:extra{{ i }}">
+            <th scope="row" class="dataset-label" property="rdfs:label">{{ _(key|e) }}</th>
+            <td class="dataset-details" property="rdf:value">{{ value }}</td>
+        </tr>
+  {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,6 @@
+include README.rst
+include LICENSE
+include requirements.txt
+recursive-include ckanext/cgu_dataset_form *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/cgu_dataset_form/migration *.ini *.py *.mako
+recursive-include ckanext/cgu_dataset_form/public *.*

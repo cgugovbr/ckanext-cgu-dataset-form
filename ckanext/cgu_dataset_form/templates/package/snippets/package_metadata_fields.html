@@ -1,0 +1,127 @@
+{% ckan_extends %}
+
+{# You could remove 'free extras' from the package form like this, but we keep them for this example's tests.
+  {% block custom_fields %}
+  {% endblock %}
+#}
+
+{% block package_metadata_fields %}
+
+  {{ form.select('periodicidade',
+      label=_('Periodicidade de Atualização'),
+      is_required=True,
+      options=h.periodicidades(),
+      selected=h.cgu_dataset_form_get_extra(data.extras, 'periodicidade'),
+      error=errors.periodicidade)
+  }}
+
+  {{ form.input('coberturaTemporalInicio', label=_('Cobertura Temporal Início'), type='date', value=h.cgu_dataset_form_get_extra(data.extras, 'coberturaTemporalInicio')) }}
+
+  {{ form.input('coberturaTemporalFim', label=_('Cobertura Temporal Fim'), type='date', value=h.cgu_dataset_form_get_extra(data.extras, 'coberturaTemporalFim')) }}
+
+  {{ form.select('coberturaEspacial', label=_('Cobertura Espacial'), options=h.opcoes_espaciais(),selected=h.cgu_dataset_form_get_extra(data.extras, 'coberturaEspacial')) }}
+
+  {{ form.input('valorCoberturaEspacial', label=_('Detalhamento da Cobertura Espacial'), type='text', value=h.cgu_dataset_form_get_extra(data.extras, 'valorCoberturaEspacial')) }}
+
+  {{ 
+      form.select('granularidadeEspacial', label=_('Granularidade Espacial'), options=[
+              {'text': '', 'value': ''},
+              {'text': 'Federal', 'value': 'FEDERAL'},
+              {'text': 'Estadual', 'value': 'ESTADUAL'},
+              {'text': 'Municipal', 'value': 'MUNICIPAL'},
+          ],
+          selected=h.cgu_dataset_form_get_extra(data.extras, 'granularidadeEspacial')
+      ) 
+  }}
+
+  {{ 
+      form.checkbox(
+          'atualizacaoVersao',
+          label=_('Atualização de Versão'),
+          value='true',
+          checked=(h.cgu_dataset_form_get_extra(data.extras, 'atualizacaoVersao') == 'true'),
+      )
+  }}
+
+  {{ form.checkbox(
+      'descontinuado',
+      label=_('Descontinuado'),
+      value='true',
+      checked=(h.cgu_dataset_form_get_extra(data.extras, 'descontinuado') == 'true'),
+  ) }}
+
+  {{ form.input('dataDescontinuacao', label=_('Data da Descontinuação'), type='date', value=h.cgu_dataset_form_get_extra(data.extras, 'dataDescontinuacao')) }}
+
+  <fieldset class="control-group">
+    <label class="control-label">{{ _('Observância Legal') }}</label>
+    <div class="controls">
+      {% for valor, nome in h.observancias_legais().items() %}
+        <label class="checkbox">
+            <input type="checkbox" name="observanciaLegal" value="{{ valor }}" {% if h.cgu_dataset_form_get_extra(data.extras, 'observanciaLegal') and valor in h.cgu_dataset_form_get_extra(data.extras, 'observanciaLegal').split(',') %}checked{% endif %}/>
+            {{ nome }}
+        </label>
+        <br>
+      {% endfor %}
+      <br>
+      <br>
+    </div>
+  </fieldset>
+
+  {{ 
+      form.checkbox(
+          'dadosAbertos',
+          label=_('Dados Abertos'),
+          value='true',
+          checked=(h.cgu_dataset_form_get_extra(data.extras, 'dadosAbertos') == 'true'),
+      )
+  }}
+
+  {{ 
+      form.checkbox(
+          'relacaoOds',
+          label=_('Possui relação com objetivos de desenvolvimento sustentável (ODS)?'),
+          value='true',
+          checked=(h.cgu_dataset_form_get_extra(data.extras, 'relacaoOds') == 'true'),
+      )
+  }}
+
+  <fieldset class="control-group">
+    <label class="control-label">{{ _('Objetivos de Desenvolvimento Sustentável (ODS)') }}</label>
+    <div class="controls">
+      {% for valor, nome in h.objetivos_desenvolvimento_sustentavel().items() %}
+        <label class="checkbox">
+            <input type="checkbox" name="ods" value="{{ valor }}" {% if h.cgu_dataset_form_get_extra(data.extras, 'ods') and valor in h.cgu_dataset_form_get_extra(data.extras, 'ods').split(',') %}checked{% endif %}/>
+            {{ nome }}
+        </label>
+        <br>
+      {% endfor %}
+      <br>
+      <br>
+    </div>
+  </fieldset>
+
+  {{ 
+      form.checkbox(
+          'dadosRacaEtnia',
+          label=_('Possui dados de raça/etnia?'),
+          value='true',
+          checked=(h.cgu_dataset_form_get_extra(data.extras, 'dadosRacaEtnia') == 'true'),
+      )
+  }}
+
+  {{ 
+      form.checkbox(
+          'dadosGenero',
+          label=_('Possui dados de gênero?'),
+          value='true',
+          checked=(h.cgu_dataset_form_get_extra(data.extras, 'dadosGenero') == 'true'),
+      )
+  }}
+
+
+  {% set extras_without_cgu_fields = h.cgu_dataset_form_remove_extras(data.extras) %}
+
+  {% snippet 'snippets/custom_form_fields.html', extras=extras_without_cgu_fields, errors=errors, limit=3 %}
+
+
+{% endblock %}

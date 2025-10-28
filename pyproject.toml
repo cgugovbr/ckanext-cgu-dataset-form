@@ -1,0 +1,38 @@
+[project]
+name = "ckanext-cgu-dataset-form"
+version = "0.0.1"
+description = "Extensão que modifica o formulário dos datasets para incluir campos do Portal de Dados Abertos"
+readme = "README.md"
+authors = [
+    {name = "Divisão de Prospecção de Soluções", email = "disol@cgu.gov.br"}
+]
+license = {text = "AGPL"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+keywords = [ "CKAN", "dataset", "form", "CGU", ]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/cgugovbr/ckanext-cgu-dataset-form"
+
+[project.entry-points."ckan.plugins"]
+cgu_dataset_form = "ckanext.cgu_dataset_form.plugin:CguDatasetFormPlugin"
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+        "ignore::sqlalchemy.exc.SADeprecationWarning",
+        "ignore::sqlalchemy.exc.SAWarning",
+        "ignore::DeprecationWarning",
+]
+addopts = "--ckan-ini test.ini"
